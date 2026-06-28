@@ -1,0 +1,1 @@
+ALTER TABLE `negative_keyword_history` ADD `reason` varchar(255);

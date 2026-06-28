@@ -1,0 +1,40 @@
+CREATE TABLE `ab_experiments` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`name` varchar(256) NOT NULL,
+	`description` text,
+	`campaign_id` varchar(64),
+	`campaign_name` varchar(256),
+	`ad_group_id` varchar(64),
+	`ad_group_name` varchar(256),
+	`experiment_type` varchar(64) NOT NULL DEFAULT 'rsa_variant',
+	`status` varchar(32) NOT NULL DEFAULT 'draft',
+	`hypothesis` text,
+	`primary_metric` varchar(64) DEFAULT 'ctr',
+	`metric_goal` varchar(128),
+	`start_date` timestamp,
+	`end_date` timestamp,
+	`result` varchar(32),
+	`ai_analysis` text,
+	`created_by` varchar(128),
+	`created_at` timestamp NOT NULL DEFAULT (now()),
+	`updated_at` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	CONSTRAINT `ab_experiments_id` PRIMARY KEY(`id`)
+);
+--> statement-breakpoint
+CREATE TABLE `ab_variants` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`experiment_id` int NOT NULL,
+	`variant_type` varchar(32) NOT NULL DEFAULT 'control',
+	`name` varchar(256) NOT NULL,
+	`description` text,
+	`content` text,
+	`impressions` int DEFAULT 0,
+	`clicks` int DEFAULT 0,
+	`cost_micros` bigint DEFAULT 0,
+	`conversions` int DEFAULT 0,
+	`ctr` varchar(16) DEFAULT '0.00',
+	`cpc` varchar(16) DEFAULT '0.00',
+	`created_at` timestamp NOT NULL DEFAULT (now()),
+	`updated_at` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	CONSTRAINT `ab_variants_id` PRIMARY KEY(`id`)
+);

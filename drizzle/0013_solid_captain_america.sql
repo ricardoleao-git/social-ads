@@ -1,0 +1,2 @@
+ALTER TABLE `negative_keyword_history` ADD `confirmed` boolean DEFAULT false NOT NULL;--> statement-breakpoint
+ALTER TABLE `negative_keyword_history` ADD `updatedAt` timestamp DEFAULT (now()) NOT NULL;

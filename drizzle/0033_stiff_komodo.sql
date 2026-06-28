@@ -1,0 +1,21 @@
+CREATE TABLE `shared_dashboards` (
+	`id` int AUTO_INCREMENT NOT NULL,
+	`token` varchar(64) NOT NULL,
+	`name` varchar(255) NOT NULL,
+	`client_id` int,
+	`dashboard_type` enum('executive_summary','campaign_detail','client_report','custom') NOT NULL DEFAULT 'executive_summary',
+	`filters` json,
+	`visible_sections` json DEFAULT ('["kpis","funnel","trends","adgroups"]'),
+	`welcome_message` text,
+	`custom_logo` varchar(512),
+	`is_active` boolean NOT NULL DEFAULT true,
+	`expires_at` timestamp,
+	`access_password` varchar(255),
+	`view_count` int NOT NULL DEFAULT 0,
+	`last_viewed_at` timestamp,
+	`created_by` varchar(255),
+	`created_at` timestamp NOT NULL DEFAULT (now()),
+	`updated_at` timestamp NOT NULL DEFAULT (now()) ON UPDATE CURRENT_TIMESTAMP,
+	CONSTRAINT `shared_dashboards_id` PRIMARY KEY(`id`),
+	CONSTRAINT `shared_dashboards_token_unique` UNIQUE(`token`)
+);

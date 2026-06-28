@@ -1,0 +1,1 @@
+ALTER TABLE `alert_email_config` MODIFY COLUMN `emails` varchar(2000) NOT NULL DEFAULT 'atendimento@zenite.tech,rjll70@gmail.com';
